@@ -26,11 +26,10 @@ def read_cilas_data(csv):
     # Calculate the sortable silt percentage
     sortable_silt_data['Sortable Silt Percentage'] = (sortable_silt_data['Silt'] / (sortable_silt_data['Sand'] + sortable_silt_data['Silt'] + sortable_silt_data['Clay'])) * 100
     
-    name=csv[:-4]
     
-    return sortable_silt_data,name
+    return sortable_silt_data
 
-def SS_perc_mean(sortable_silt_data,name):
+def SS_perc_mean(sortable_silt_data):
     
     #Graph 1: Sortable silt mean vs sortable silt percentage
     
@@ -66,7 +65,7 @@ def SS_perc_mean(sortable_silt_data,name):
     #Graph 2: Core length vs Sortable silt mean
     plt.subplot(3, 1, 2)
     
-    # Core depth
+    # Plot
     plt.plot( sortable_silt_data['Depth'].values, sortable_silt_data['Mean Size'].values, marker='o', color='b')
 
     # Set the x-axis label
@@ -84,18 +83,21 @@ def SS_perc_mean(sortable_silt_data,name):
     
     # Velocity calculation. From McCave 2017 https://www.sciencedirect.com/science/article/pii/S0967063717300754
     U=sortable_silt_data['Mean Size'].values*1.31 -17.18
+    
+    #Plot
     plt.plot( sortable_silt_data['Depth'].values, U, marker='o', color='b')
+    
     # Set the x-axis label
     plt.xlabel('Core length (cm)')
     # Set the y-axis label
     plt.ylabel('U (cm/seg)')
     
     plt.tight_layout()
-    plt.savefig(name+'.png')
+    plt.savefig('ss.png')
     plt.show()
     
 
 #Example    
 csv=r'D:\Onedrive_sebastian\OneDrive - gl.fcen.uba.ar\Doc\4.Base de datos\7.Corings\Cores_GEO4_5\Au_Geo05_GC135.csv'
-SS_data,name=read_cilas_data(csv)
-SS_perc_mean(SS_data,name)
+SS_data=read_cilas_data(csv)
+SS_perc_mean(SS_data)
