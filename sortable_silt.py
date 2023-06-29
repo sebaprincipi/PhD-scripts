@@ -13,6 +13,7 @@ import numpy as np
 
 def read_cilas_data(csv):
     # Read the CSV file containing the granulometry data
+    # Necessary columns: SampleID	Depth	Clay	Silt	Sand
     data = pd.read_csv(csv,encoding='latin-1',sep=";")
     
     
